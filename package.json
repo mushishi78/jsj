@@ -1,0 +1,20 @@
+{
+  "name": "jsj",
+  "version": "0.0.0",
+  "description": "A transpile to JavaScript language.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mushishi78/jsj.git"
+  },
+  "keywords": [
+    "transpile",
+    "JavaScript",
+    "language"
+  ],
+  "author": "Max White",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mushishi78/jsj/issues"
+  },
+  "homepage": "https://github.com/mushishi78/jsj#readme"
+}
