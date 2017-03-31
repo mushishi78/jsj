@@ -1,0 +1,5 @@
+namespace Foo.Bar.Quiz
+
+Duck: 0;
+Cow: 1;
+Chicken: 2;

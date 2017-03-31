@@ -1,0 +1,13 @@
+A = fn() {
+  return 5;
+};
+
+C = fn(a b) {
+  if (a > b) {
+    p: 5;
+  }
+
+  else {
+    q: 6;
+  }
+};

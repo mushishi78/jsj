@@ -1,0 +1,48 @@
+<html>
+  <head>
+    <title>JSJ tests</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.6.12/beautify.min.js"></script>
+    <script src="../tokenize.js"></script>
+    <script src="../parse.js"></script>
+    <script src="../print.js"></script>
+    <script src="./index.js"></script>
+    <style>
+      p { margin: 0 5px; }
+      .failed { color: red; }
+    </style>
+  </head>
+  <body>
+    <main id="results"></main>
+    <script>
+      write("1.." + TESTS.length);
+
+      for (var i = 0; i < TESTS.length; i++) {
+        var expected = TESTS[i].output;
+        var actual = parse(TESTS[i].input);
+        var failed = expected !== actual;
+        var str = "ok " + (i + 1) + " " + TESTS[i].name;
+        write((failed ? "not " : "") + str, failed);
+      }
+
+      function parse(input) {
+        try {
+          var tokens = JSJ.tokenize(input);
+          var ast = JSJ.parse(tokens);
+          return js_beautify(JSJ.print(ast));
+        } catch(error) {
+          return JSON.stringify(error, null, 2);
+        }
+      }
+
+      function write(str, failed) {
+        console.log(str);
+
+        var p = document.createElement("p");
+        p.innerHTML = str;
+        p.className = failed ? "failed" : "";
+        document.getElementById("results").appendChild(p);
+      }
+    </script>
+  </body>
+</html>

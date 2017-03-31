@@ -1,0 +1,8 @@
+using {
+  Foo.Bar
+  Jazz
+  Harry.Operator
+}
+
+a = Bar.jump();
+b = Jazz(Operator.Fixed);

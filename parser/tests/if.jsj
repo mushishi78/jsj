@@ -1,0 +1,45 @@
+a = true;
+b = true;
+c = true;
+
+if (a) {
+  res = 0;
+}
+
+if (a) {
+  res = 0;
+} else {
+  res = 0;
+}
+
+if (a) {
+  res = 0;
+} else if (b) {
+  res = 0;
+}
+
+if (a) {
+  res = 0;
+} else if (b) {
+  res = 0;
+} else if (c) {
+  res = 0;
+}
+
+if (a) {
+  res = 0;
+} else if (b) {
+  res = 0;
+} else {
+  res = 0;
+}
+
+if (a) {
+  res = 0;
+} else if (b) {
+  res = 0;
+} else if (c) {
+  res = 0;
+} else {
+  res = 0;
+}

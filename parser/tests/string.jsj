@@ -1,0 +1,9 @@
+a = 'This is a string!';
+b = '
+  This is a multiple line string.
+
+  It is useful.
+';
+c = 'This is an interpolation: {b}';
+d = 'Multiple interpolations: {a}, {b}, {c}';
+e = 'Escapes: \'\{\}\\"	';

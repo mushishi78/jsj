@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/mushishi78/jsj/issues"
   },
-  "homepage": "https://github.com/mushishi78/jsj#readme"
+  "homepage": "https://github.com/mushishi78/jsj#readme",
+  "scripts": {
+    "start": "http-server -c-1",
+    "generate-tests": "node parser/tests/index-generate.js"
+  }
 }

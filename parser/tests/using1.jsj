@@ -1,0 +1,5 @@
+using {
+  Foo.Bar.Quiz
+}
+
+a = Quiz.jump();

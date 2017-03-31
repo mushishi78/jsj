@@ -1,0 +1,7 @@
+A = fn(a b) {
+  if (a > b) {
+    p: 5;
+  }
+
+  return 5;
+};

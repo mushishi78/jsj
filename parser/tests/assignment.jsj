@@ -1,0 +1,17 @@
+# Variable assignment
+a = 0;
+b =~ a;
+c =~ a b;
+a ~= b;
+a b ~= c;
+d e f ~= a();
+
+# Property assignment
+A = {
+  p: 0;
+  q:~ p;
+  r:~ p q;
+  a ~:b;
+  a b ~:c;
+  h j k ~: a();
+};

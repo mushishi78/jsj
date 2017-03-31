@@ -1,0 +1,152 @@
+%YAML 1.2
+---
+name: jsj
+file_extensions: [jsj]
+scope: source.jsj
+variables:
+  identifier: '[_$[:alpha:]]'
+
+contexts:
+  main:
+    - include: top-level
+    - include: statements
+
+  top-level:
+    - match: \bnamespace\b
+      scope: keyword.control.import
+      push:
+        - meta_scope: namespace
+        - match: '{{identifier}}+'
+          scope: entity.other
+        - match: \n
+          pop: true
+    - match: \busing\b
+      scope: keyword.control.import
+      push:
+        - meta_scope: using-block
+        - match: '{{identifier}}+'
+          scope: entity.other
+        - match: '\}'
+          pop: true
+
+  statements:
+    - include: control
+    - include: expressions
+
+  expressions:
+    - include: string
+    - include: comments
+    - include: operators
+    - include: keywords
+    - include: constants
+    - include: properties
+    - include: functions
+    - include: numbers
+    - include: punctuation
+    - include: variables
+
+  control:
+    - match: (^|\s)(for|loop|if|else)\s
+      scope: keyword.control
+
+  string:
+    - match: \'
+      scope: punctuation.definition.string.begin
+      push:
+        - meta_scope: string.quoted.single
+        - match: "\\\\['\\\\{}]"
+          scope: constant.character.escape
+        - match: '{'
+          scope: punctuation.definition.template-expression.begin
+          push:
+            - meta_scope: meta.template.expression
+            - meta_content_scope: source.embedded.expression
+            - match: '}'
+              scope: punctuation.definition.template-expression.end
+              pop: true
+            - include: expressions
+        - match: \'
+          scope: punctuation.definition.string.end
+          pop: true
+
+  comments:
+    - match: '#'
+      scope: punctuation.definition.comment
+      push:
+        - meta_scope: comment.line
+        - match: \n
+          pop: true
+
+  operators:
+    - match: \s(&&|\|\||<=|>=|<|>|==|!=|/|\*|\+|\%|-|=|in|~=|=~)\s
+      scope: keyword.operator
+    - match: ':~|~:|:'
+      scope: keyword.operator
+    - match: '!'
+      scope: keyword.operator.logical
+    - match: '(?<=\d)\.\.(?=\d)'
+      scope: keyword.operator
+
+  keywords:
+    - match: \b(break|continue|return|do)\b
+      scope: keyword.control
+
+  constants:
+    - match: \b(true|false|undef)\b
+      scope: constant.language
+
+  functions:
+    - match: 'fn'
+      scope: keyword
+      push:
+        - meta_scope: meta.parameters
+        - match: '\)'
+          pop: true
+        - match: '{{identifier}}+'
+          scope: variable.parameter.function
+
+  numbers:
+    - match: '(?<=[\s\(\!\{\.])(\d+(\.\d+)?)(?=[\s\)\.\,\};])'
+      scope: constant.numeric
+
+  punctuation:
+    - match: '\{'
+      scope: punctuation.definition.block
+      push:
+        - meta_scope: meta.block.js
+        - match: '\}'
+          scope: punctuation.definition.block
+          pop: true
+        - include: statements
+    - match: \(
+      scope: punctuation.definition.group
+      push:
+        - meta_scope: meta.group
+        - match: \)
+          scope: punctuation.definition.group
+          pop: true
+        - include: expressions
+    - match: '\['
+      scope: punctuation.definition.brackets
+      push:
+        - meta_scope: meta.brackets
+        - match: '\]'
+          scope: punctuation.definition.brackets
+          pop: true
+        - include: expressions
+    - match: \;
+      scope: punctuation.terminator.statement
+    - match: \,
+      scope: punctuation.terminator.statement
+
+  variables:
+    - match: '{{identifier}}+(?=\.{{identifier}})'
+      scope: variable.other.object
+    - match: '{{identifier}}+(?=\()'
+      scope: entity.name.function
+    - match: '{{identifier}}+'
+      scope: variable
+
+  properties:
+    - match: '({{identifier}}+\s*)+(?=:|~:|:~)'
+      scope: variable.parameter.function

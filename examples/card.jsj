@@ -1,0 +1,47 @@
+namespace BlapCo.Order.Card
+
+using {
+  BlapCo.Error
+}
+
+# New card
+New: fn(number cvn month year) {
+  type: 'Card';
+  number: number;
+  cvn: cvn;
+  expiry:~ month year;
+};
+
+# Validate the car
+Validate: fn(card) {
+  number cvn ~:card;
+
+  if (number == undef || number.length < 12) {
+    message = 'Card must have a number';
+    code = 400;
+    error:~ message code;
+  }
+
+  if (cvn == undef || cvn.length != 3) {
+    error: {
+      message: 'Card must have a cvn';
+      code: 400;
+    };
+  }
+};
+
+# Example usage
+card = New('7465 4859 3947 3749', '343', 10, 2017);
+card = Validate(card);
+
+# Complex merging
+card = {
+  expiry_month expiry_year ~:card;
+
+  message = 'Card must have a number';
+  code = 400;
+  error:~ message code;
+
+  number: '4859 3947 3749';
+  cvn: '343';
+};
