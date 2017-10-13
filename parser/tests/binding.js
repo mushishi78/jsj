@@ -24,12 +24,15 @@
     var m = (0 + (0 * 0));
     var n = (0 * JSJ.Core.range(0, 0));
     var o = (!JSL.Core.truthy(a) * 0);
-    var p = !JSL.Core.truthy(a.b);
-    var q = (JSJ.Core.and(0, function() {
+    var p = JSJ.Core.range(a, a.b);
+    var q = !JSL.Core.truthy(a.b);
+    var r = (JSJ.Core.and(0, function() {
         return 0;
     }) === 0);
-    var r = ((0 === 0) + 0);
-    var s = ((0 + 0) * 0);
-    var t = !JSL.Core.truthy((a * 0));
-    var u = !JSL.Core.truthy(a).b;
+    var s = ((0 === 0) + 0);
+    var t = ((0 + 0) * 0);
+    var u = JSJ.Core.range((0 * 0), 0);
+    var v = !JSL.Core.truthy((a * 0));
+    var w = JSJ.Core.range(a, a).b;
+    var x = !JSL.Core.truthy(a).b;
 })();

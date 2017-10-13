@@ -78,13 +78,7 @@ contexts:
           pop: true
 
   operators:
-    - match: \s(&&|\|\||<=|>=|<|>|==|!=|/|\*|\+|\%|-|=|in|~=|=~)\s
-      scope: keyword.operator
-    - match: ':~|~:|:'
-      scope: keyword.operator
-    - match: '!'
-      scope: keyword.operator.logical
-    - match: '(?<=\d)\.\.(?=\d)'
+    - match: (&&|\|\||<=|>=|<|>|==|!=|/|\*|\+|\%|-|=|in|~=|=~|:~|~:|:|!|\.\.)
       scope: keyword.operator
 
   keywords:
@@ -106,37 +100,13 @@ contexts:
           scope: variable.parameter.function
 
   numbers:
-    - match: '(?<=[\s\(\!\{\.])(\d+(\.\d+)?)(?=[\s\)\.\,\};])'
+    - match: '(\d+(\.\d+)?)'
       scope: constant.numeric
 
   punctuation:
-    - match: '\{'
-      scope: punctuation.definition.block
-      push:
-        - meta_scope: meta.block.js
-        - match: '\}'
-          scope: punctuation.definition.block
-          pop: true
-        - include: statements
-    - match: \(
-      scope: punctuation.definition.group
-      push:
-        - meta_scope: meta.group
-        - match: \)
-          scope: punctuation.definition.group
-          pop: true
-        - include: expressions
-    - match: '\['
-      scope: punctuation.definition.brackets
-      push:
-        - meta_scope: meta.brackets
-        - match: '\]'
-          scope: punctuation.definition.brackets
-          pop: true
-        - include: expressions
-    - match: \;
-      scope: punctuation.terminator.statement
-    - match: \,
+    - match: '[\{\}\(\)\[\]]'
+      scope: punctuation.definition
+    - match: '[\;\,]'
       scope: punctuation.terminator.statement
 
   variables:

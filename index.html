@@ -4,6 +4,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.6.12/beautify.min.js"></script>
     <script src="./parser/tokenize.js"></script>
+    <script src="./parser/validateTokens.js"></script>
     <script src="./parser/parse.js"></script>
     <script src="./parser/print.js"></script>
     <style>
@@ -39,9 +40,11 @@
       jsjElem.addEventListener("input", function () {
         try {
           var tokens = JSJ.tokenize(jsjElem.value);
-          var ast = JSJ.parse(tokens);
-          var output = JSJ.print(ast);
-          jsElem.innerHTML = js_beautify(output);
+          JSJ.validateTokens(tokens);
+          // var ast = JSJ.parse(tokens);
+          // var output = JSJ.print(ast);
+          // jsElem.innerHTML = js_beautify(output);
+          jsElem.innerHTML = JSON.stringify(tokens, null, 2);
           jsElem.className = "";
         } catch(error) {
           jsElem.innerHTML = JSON.stringify(error, null, 2);

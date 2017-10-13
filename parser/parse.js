@@ -326,8 +326,10 @@ JSJ.parse = function(tokens) {
       var members = [];
       step();
       while (token.value !== "]") {
-        if (token.value === ",") step();
         members.push(expression(0));
+        if (token.value === "]") break;
+        if (token.value !== ",") throw { error: "no-comma-in-array", token: token };
+        step();
       }
       tree = { type: "array", members: members };
       step();
@@ -354,15 +356,6 @@ JSJ.parse = function(tokens) {
       step();
       var right = expression(bp);
       tree = { type: "binary", operator: operator, left: left, right: right };
-    }
-
-    // Range
-    else if (token.value === "..") {
-      if (left.type !== "integer") throw { error: "invalid-range", left: left };
-      step();
-      if (token.type !== "number") throw { error: "invalid-range", token: token };
-      tree = { type: "range", start: left.value, end: token.value };
-      step();
     }
 
     // Property accessor

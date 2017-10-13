@@ -447,6 +447,14 @@ JSJ.print = function(ast) {
         print("; })");
       }
 
+      else if (expression.operator === "..") {
+        print("JSJ.Core.range(");
+        printExpression(expression.left);
+        print(",");
+        printExpression(expression.right);
+        print(")");
+      }
+
       else {
         var operator = expression.operator;
 
@@ -459,10 +467,6 @@ JSJ.print = function(ast) {
         printExpression(expression.right);
         print(")");
       }
-    }
-
-    if (expression.type === "range") {
-      print("JSJ.Core.range(" + expression.start + ", " + expression.end + ")");
     }
 
     if (expression.type === "property-accessor") {

@@ -1,0 +1,5 @@
+using {
+  console.log
+}
+
+log('This is not how you do things');

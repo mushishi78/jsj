@@ -79,12 +79,8 @@ JSJ.tokenize = function(text) {
       for (i = start + 1; i < text.length; i++) {
         if (!isDigit(text[i])) break;
       }
-
-      // If it not the begining of a name
-      if (!text[i] || " )}],.;".indexOf(text[i]) >= 0) {
-        addToken("number", i);
-        continue;
-      }
+      addToken("number", i);
+      continue;
     }
 
     // String
@@ -144,13 +140,13 @@ JSJ.tokenize = function(text) {
     }
 
     // 2 character binary
-    if (["&&", "||", "==", "!=", "<=", ">="].indexOf(text.slice(start, start + 2)) >= 0) {
+    if (["&&", "||", "==", "!=", "<=", ">=", ".."].indexOf(text.slice(start, start + 2)) >= 0) {
       addToken("binary", start + 2);
       continue;
     }
 
     // 2 character symbol
-    if (["..", "~=", "=~", "~:", ":~"].indexOf(text.slice(start, start + 2)) >= 0) {
+    if (["~=", "=~", "~:", ":~"].indexOf(text.slice(start, start + 2)) >= 0) {
       addToken("symbol", start + 2);
       continue;
     }

@@ -1,0 +1,9 @@
+{
+  "type": "invalid-assignment",
+  "token": {
+    "type": "symbol",
+    "value": "(",
+    "line": 4,
+    "column": 3
+  }
+}
